@@ -6,16 +6,25 @@ function Boton(props) {
     return isNaN(valor) && valor !== "." && valor !== "=";
   };
 
-  return (
-    <div
-      className={`boton-contenedor ${
-        esOperador(props.children) ? "operador" : null
-      }`}
-      onClick={() => props.manejarClic(props.children)} //{ ()=>es porque debemos llamar anonimamente a la función }
-    >
-      {props.children}
-    </div>
-  );
+  if (esOperador(props.children)) {
+    return (
+      <button
+        className="boton-contenedor operador"
+        onClick={() => props.manejarClic(props.children)} //{ ()=>es porque debemos llamar anonimamente a la función }
+      >
+        {props.children}
+      </button>
+    );
+  } else {
+    return (
+      <button
+        className="boton-contenedor"
+        onClick={() => props.manejarClic(props.children)} //{ ()=>es porque debemos llamar anonimamente a la función }
+      >
+        {props.children}
+      </button>
+    );
+  }
 }
 
 export default Boton;
